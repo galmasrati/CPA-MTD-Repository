@@ -1,0 +1,37 @@
+;;
+;; The main GROMACS topology file
+;;
+
+; Include forcefield parameters
+#include "./charmm36-2015.ff/forcefield.itp"
+
+; Include chain topologies
+#include "4au5.itp"
+#include "POPE.itp"
+#include "POPG.itp"
+
+; Include water topology
+#include "./charmm36-2015.ff/tip3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include topology for ions
+#include "./charmm36-2015.ff/ions.itp"
+
+[ system ]
+; Name
+Title in water
+
+[ molecules ]
+; Compound	#mols
+4au5             1
+POPE  	         232
+POPG  	          60
+SOL            18826
+NA               115
+CL               57
