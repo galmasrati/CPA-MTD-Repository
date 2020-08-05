@@ -1,1 +1,15 @@
-README
+This folder contains all input files required for
+initiating a metadynmics simulation starting from
+the inward-facing crystal structure of EcNhaA.
+
+It include the following files and folders:
+
+charmm36-2015.ff (force field)
+NhaA_plumed.dat (plumed input file)
+4au5_w_sol_ions_membrane.gro (Coordination file - EcNhaA embedded in a solvated)
+MTD.mdp
+4au5.itp
+POPE.itp
+POPG.itp
+topol.top
+index.ndx
