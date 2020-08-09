@@ -55587,5 +55587,5 @@
 
 ; Include Position restraint file
 #ifdef POSRES
-#include "posre.itp"
+#include "posre_Protein.itp"
 #endif

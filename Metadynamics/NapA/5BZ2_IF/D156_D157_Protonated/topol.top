@@ -1,0 +1,46 @@
+;
+;	This is a standalone topology file
+;
+;	Created by:
+;	                  :-) GROMACS - gmx pdb2gmx, VERSION 5.1 (-:
+;	
+;	Executable:   /usr/local/gromacs/bin/gmx_mpi
+;	Data prefix:  /usr/local/gromacs
+;	Command line:
+;	  gmx_mpi pdb2gmx -f relax_original.gro -o 5BZ2_Protonated -asp -glu
+;	Force field was read from current directory or a relative path - path added.
+;
+
+; Include forcefield parameters
+#include "./charmm36-2015.ff/forcefield.itp"
+
+; Include chain topologies
+#include "5bz2.itp"
+#include "POPE.itp"
+#include "POPG.itp"
+
+; Include water topology
+#include "./charmm36-2015.ff/tip3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include topology for ions
+#include "./charmm36-2015.ff/ions.itp"
+
+[ system ]
+; Name
+Title in water
+
+[ molecules ]
+; Compound        #mols
+5bz2              1
+POPE  	          239
+POPG  	          59
+SOL               20820
+NA                124
+CL                61
