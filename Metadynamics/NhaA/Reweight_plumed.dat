@@ -1,0 +1,20 @@
+# Plumed input file for post-processing metadynamics.
+# To run: plumed driver --noatoms --plumed Reweight_plumed.dat
+#
+# Reads the values of ang and dist from the metadynamics' COLVAR file.
+# GRID_MIN and GRID_MAX values should be updated based on the values sampled during metadynamics.
+#
+ang: READ FILE=COLVAR VALUES=ang IGNORE_FORCES IGNORE_TIME
+dist: READ FILE=COLVAR VALUES=dist.z IGNORE_FORCES IGNORE_TIME
+metad: METAD ARG=ang,dist.z PACE=1 HEIGHT=1.5 SIGMA=0.03,0.1 FILE=HILLS GRID_MIN=-pi,-3.0 GRID_MAX=pi,3.0 GRID_SPACING=0.006,0.02 BIASFACTOR=20.0 TEMP=310.0 CALC_RCT RCT_USTRIDE=50
+#
+# Reweights the data
+#
+bias: REWEIGHT_METAD TEMP=310
+#
+# Output the data to a histogram
+#
+histo: HISTOGRAM ARG=ang,dist.z GRID_MIN=-pi,-3.0 GRID_MAX=pi,3.0 GRID_SPACING=0.006,0.02 BANDWIDTH=0.006,0.006 LOGWEIGHTS=bias
+DUMPGRID GRID=histo FILE=myhist FMT=%120.115f
+#
+ENDPLUMED
